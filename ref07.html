@@ -1,5 +1,244 @@
 <html>
+<head>
+<title>Seven Segment Display</title> 
+    <style>
+        .blank {background-color: lightgray;}
+        .hsegment {background-color: grey; width: 50px; text-align:center; }
+        .vsegment {background-color: grey; height: 50px; padding: 5px;}
+        .invis {}
+        .wire {background-color: black; width: 100px; text-align: center; color: white;}
+        .chip {background-color: grey; width: 100px; text-align: center; border: solid;}
+    </style>
+    <style>
+        .diagram-cell {vertical-align: top; text-align:center;}
+        .keypad {background-color: silver;}
+        .circuit {background-color: snow;}
+        .display {background-color: skyblue;}
+    </style>
+</head>
 <body>
-NOTHING
+<h3>Seven Segment Display</h3>
+    <script>
+      function turnSegmentOn(segment) {
+         var state = document.getElementById(segment).style.backgroundColor
+         if (state != 'red'){ state = 'red'} else {state = 'grey'}
+         document.getElementById(segment).style.backgroundColor = state
+      }
+      function switchSegment(segment,onoff) {
+         console.log ('segment = '+segment, 'on/off = '+onoff)
+         if (onoff == 1){ state = 'red'} else {state = 'grey'}
+         document.getElementById('S'+segment).style.backgroundColor = state
+      }
+      function dec2wxyz (inputNumber) {
+          var x = inputNumber
+          var out = [0,0,0,0]
+          console.log ('x = ', x, 'out = ', out[0],out[1],out[2],out[3])
+          
+          var i = out.length - 1
+          do {
+              
+              out[i] = x % 2
+              console.log('i = ', i, 'out = ', out[0],out[1],out[2],out[3])
+              i--
+              x = Math.floor(x/2)
+              console.log('x = ', x)
+          }
+          while (x>0)
+          //out[i] = 1
+          //console.log('dec2wxyz inputNumber = ',inputNumber,'out = ', out[0],out[1],out[2],out[3])
+          updateInputWires(out[0],out[1],out[2],out[3])
+          return (out)
+          /*return [
+              [0,0,0,0],
+              [0,0,0,1],
+              [0,0,1,0],
+              [0,0,1,1],
+              [0,1,0,0],
+              [0,1,0,1],
+              [0,1,1,0],
+              [0,1,1,1],
+              [1,0,0,0],
+              [1,0,0,1],
+              [1,0,1,0],
+              [1,0,1,1],
+              [1,1,0,0],
+              [1,1,0,1],
+              [1,1,1,0],
+              [1,1,1,1]
+              ][inputNumber]*/
+      } 
+      function wxyz2abcdefg (wxyz) {
+          var a = wxyz2a (wxyz[0], wxyz[1], wxyz[2], wxyz[3])
+          var b = wxyz2b (wxyz[0], wxyz[1], wxyz[2], wxyz[3])
+          var c = wxyz2c (wxyz[0], wxyz[1], wxyz[2], wxyz[3])
+          var d = wxyz2d (wxyz[0], wxyz[1], wxyz[2], wxyz[3])
+          var e = wxyz2e (wxyz[0], wxyz[1], wxyz[2], wxyz[3])
+          var f = wxyz2f (wxyz[0], wxyz[1], wxyz[2], wxyz[3])
+          var g = wxyz2g (wxyz[0], wxyz[1], wxyz[2], wxyz[3])
+          console.log('wxyz2abcdefg yields ', a,b,c,d,e,f,g)
+          updateOutputWires (a,b,c,d,e,f,g)
+          return ([a,b,c,d,e,f,g])
+      }
+      function wxyz2a(w,x,y,z){
+          if (!w&&y || !x&&!y&&!z ||w&&!x&&!y || !w&&x&&z) {return(true)}
+          else {return(false)}
+        //  return (!w&&y || !x&&!y&&!z ||w&&!x&&!y || !w&&x&&z)
+      }
+      function wxyz2b(w,x,y,z){
+          console.log ('wxyz2b got', w, x, y, z)
+          console.log ('!w&&!x&&y =', !w&&!x&&y, '!w&&!x&&!z =', !w&&!x&&!z, '!w&&y&&z =', !w&&y&&z, '!x&&!y =', !x&&!y, '!w&&!y&&!z =', !w&&!y&&!z)
+          return (!w&&!x&&y || !w&&!x&&!z || !w&&y&&z || !x&&!y || !w&&!y&&!z)
+      }
+      function wxyz2c(w,x,y,z){
+          console.log('!w&&z =', !w&&z,'!x&&!y =',!x&&!y, '!w&&x =', !w&&x)
+          return (!w&&z || !x&&!y || !w&&x)
+      }
+      function wxyz2d(w,x,y,z){
+          return (!w&&x&&!y&&z || !w&&!x&&!z || w&&!x&&!y ||!w&&y&&!z || !w&&!x&&y)
+      }
+      function wxyz2e(w,x,y,z){
+          return (!w&&y&&!z ||!x&&!y&&!z)
+      }
+      function wxyz2f(w,x,y,z){
+          return (!w&&!y&&!z || !w&&x&&!z || w&&!x&&!y || !w&&x&&!y)
+      }
+      function wxyz2g(w,x,y,z){
+          return (!w&&!x&&y || !w&&x&&!y || !w&&x&&!z || w&&!x&&!y)
+      }
+
+      function updateInputWires(w,x,y,z) {
+        if (w){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('input-w').style.backgroundColor = state
+        if (x){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('input-x').style.backgroundColor = state
+        if (y){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('input-y').style.backgroundColor = state
+        if (z){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('input-z').style.backgroundColor = state
+      }
+       function updateOutputWires(a,b,c,d,e,f,g) {
+        if (a){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('output-a').style.backgroundColor = state
+        if (b){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('output-b').style.backgroundColor = state
+        if (c){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('output-c').style.backgroundColor = state
+        if (d){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('output-d').style.backgroundColor = state
+        if (e){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('output-e').style.backgroundColor = state
+        if (f){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('output-f').style.backgroundColor = state
+        if (g){ state = 'red'} else {state = 'aqua'}
+         document.getElementById('output-g').style.backgroundColor = state
+      }
+     function displayNumber(numberToDisplay) {
+          var x = wxyz2abcdefg (dec2wxyz(numberToDisplay))
+          //var x = ["0000", "0001", "0010"][numberToDisplay]
+          console.log(x)
+          document.getElementById('numberBox').innerHTML = x
+          for(i=0; i<7; i++) {
+              switchSegment(i+1,x[i])
+          }
+          
+      }
+        
+    </script>
+<table>
+    <tr>
+    <td id="keypad_td" class="diagram-cell keypad"><h3>Keypad</h3>
+        <button type="button" onclick="displayNumber(1)">1</button>
+        <button type="button" onclick="displayNumber(2)">2</button>
+        <button type="button" onclick="displayNumber(3)">3</button><br />
+        <button type="button" onclick="displayNumber(4)">4</button>
+        <button type="button" onclick="displayNumber(5)">5</button>
+        <button type="button" onclick="displayNumber(6)">6</button><br />
+        <button type="button" onclick="displayNumber(7)">7</button>
+        <button type="button" onclick="displayNumber(8)">8</button>
+        <button type="button" onclick="displayNumber(9)">9</button><br />
+        <button type="button" onclick="displayNumber(0)">0</button>
+        <br />        
+        <p id="numberBox"></p></td>
+    </td>
+    <td id="circuit_td" class="diagram-cell circuit"><h3>Circuit</h3>
+        <table>
+        <tr>
+            <td class="invis"> </td>
+            <td class="chip" rowspan="9">CHIP</td>
+            <td class="invis"> </td>    
+        </tr>
+        <tr>
+            <td class="invis"> </td><td class="wire" id="output-a">a</td>    
+        </tr>
+        <tr>
+            <td class="invis"> </td><td class="wire" id="output-b">b</td>    
+        </tr>
+        <tr>
+            <td class="wire" id="input-w">w</td><td class="wire" id="output-c">c</td>    
+        </tr>
+        <tr>
+            <td class="wire" id="input-x">x</td><td class="wire" id="output-d">d</td>    
+        </tr>
+        <tr>
+            <td class="wire" id="input-y">y</td><td class="wire" id="output-e">e</td>    
+        </tr>
+        <tr>
+            <td class="wire" id="input-z">z</td><td class="wire" id="output-f">f</td>    
+        </tr>
+        <tr>
+            <td class="invis"> </td><td class="wire" id="output-g">g</td>    
+        </tr>
+        <tr>
+            <td class="invis"> </td><td class="invis"> </td>    
+        </tr>
+        </table>
+       
+    </td>
+    <td id="display_td" class="diagram-cell display"><h3>Display</h3>
+        <table>
+        <tr>
+            <td id="x1" class="blank"> </td>
+            <td id="S1" class="hsegment">a</td>
+            <td id="x2" class="blank"> </td>
+        </tr>
+        <tr>
+            <td id="S6" class="vsegment">f</td>
+            <td id="x3" class="blank"> </td>
+            <td id="S2" class="vsegment">b</td>
+        </tr>
+        <tr>
+            <td id="x4" class="blank"> </td>
+            <td id="S7" class="hsegment">g</td>
+            <td id="x5" class="blank"> </td>
+        </tr>
+        <tr>
+            <td id="S5" class="vsegment"> e </td>
+            <td id="x6" class="blank"> </td>
+            <td id="S3" class="vsegment">c</td>
+        </tr>
+        <tr>
+            <td id="x7" class="blank"> </td>
+            <td id="S4" class="hsegment">d</td>
+            <td id="x8" class="blank"> </td>
+        </tr>
+        </table>  
+
+        </td>
+    </tr>
+    <tr>
+    <td colspan="3">
+       <button type="button" onclick="turnSegmentOn('S1')">Toggle segment 1</button>
+       <button type="button" onclick="turnSegmentOn('S2')">Toggle segment 2</button>
+       <button type="button" onclick="turnSegmentOn('S3')">Toggle segment 3</button>      
+    </td>
+    </tr>
+    <tr>
+    <td colspan="3" id="consolelog"></td>
+    </tr>
+    </table>  
+
+
+ 
+    
 </body>
 </html>
