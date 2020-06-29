@@ -1,1 +1,64 @@
-Sending Keypad Input to dec2BCD Blackbox (refinement 0.4)
+
+<html>
+<head>
+  <style>
+    .standardTable {
+                     border: solid;
+                      border-collapse: collapse;
+     }
+    .blackbox {
+            border: solid;
+            height: 150px;
+            width: 150px;
+            text-align: center;
+            background-color: black;
+            border-color: white;
+            color: yellow;
+    }
+  </style>
+<script>
+  function driveSSD (keyPressed) {
+  document.getElementById("input-verification").innerHTML=keyPressed
+  
+  var bcd = dec2bcd (keyPressed)
+  var ssd = bcd2ssd (bcd)
+  illuminate (ssd)
+}
+  function dec2bcd (x) {
+  alert ("dec2bcd() received " + x)
+  return ("dec2bcdOUTPUT")
+}
+function bcd2ssd (x) {
+  alert ("bcd2ssd() received " + x)
+  return ("bcd2ssdOUTPUT")
+}
+function illuminate (x) {
+  alert ("illuminate() received " + x)
+}
+</script>
+  </head>
+  <body>
+    <h3>Sending Keypad Input Blackboxes (refinement 0.4)</h3>
+    <table class="standardTable">
+      <tr>
+       <td class="blackbox">
+         <button type="button" onclick="driveSSD(1)">1</button>
+         <button type="button" onclick="driveSSD(2)">2</button>
+         <button type="button" onclick="driveSSD(3)">3</button><br />
+         <button type="button" onclick="driveSSD(4)">4</button>
+         <button type="button" onclick="driveSSD(5)">5</button>
+         <button type="button" onclick="driveSSD(6)">6</button><br />
+         <button type="button" onclick="driveSSD(7)">7</button>
+         <button type="button" onclick="driveSSD(8)">8</button>
+         <button type="button" onclick="driveSSD(9)">9</button><br />
+         <button type="button" onclick="driveSSD(0)">0</button>
+         <p id="input-verification"></p>
+       </td>
+       <td class="blackbox">dec2BCD</td>
+       <td class="blackbox">BCD2SSD Signals</td>
+       <td class="blackbox">Illuminate Segments</td>
+      </tr>
+    </table>
+  </body>
+</html>
+</html>
