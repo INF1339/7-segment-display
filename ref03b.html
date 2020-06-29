@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Seven Segment Display</title> 
+    <style>
+        .standardTable {border: solid;
+                        border-collapse: collapse;}
+        .blackbox {border: solid;
+                   height: 150px;
+                   width: 150px;
+                   text-align: center;
+                   background-color: black;
+                   border-color: white;
+                   color: yellow;}
+    </style>
+    <script>
+        function driveSSD(keypressed) {
+            document.getElementById('input-verification').innerHTML = "key press detected " + keypressed)
+        }
+    </script>
+</head>
+  <body>
+    <h3>Keypad + 3 Empty Black Boxes</h3>
+    <table class="standardTable">
+      <tr>
+       <td class="blackbox">
+         <button type="button" onclick="driveSSD(1)">1</button>
+         <button type="button" onclick="driveSSD(2)">2</button>
+         <button type="button" onclick="driveSSD(3)">3</button><br />
+         <button type="button" onclick="driveSSD(4)">4</button>
+         <button type="button" onclick="driveSSD(5)">5</button>
+         <button type="button" onclick="driveSSD(6)">6</button><br />
+         <button type="button" onclick="driveSSD(7)">7</button>
+         <button type="button" onclick="driveSSD(8)">8</button>
+         <button type="button" onclick="driveSSD(9)">9</button><br />
+         <button type="button" onclick="driveSSD(0)">0</button>
+         <p id="input-verification"></p>
+       </td>
+       <td class="blackbox">dec2BCD</td>
+       <td class="blackbox">BCD2SSD Signals</td>
+       <td class="blackbox">Illuminate Segments</td>
+      </tr>
+    </table>
+  </body>
+</html>
