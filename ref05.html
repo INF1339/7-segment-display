@@ -1,5 +1,63 @@
 <html>
-<body>
-NOTHING
-</body>
+  <head>
+    <title>version 5</title>
+    <style>
+      .standardTable {
+        border: solid;
+        border-collapse: collapse;
+      }
+      .blackbox {
+        border: solid;
+        height: 150px;
+        width: 150px;
+        text-align: center;
+        background-color: black;
+        border-color: white;
+        color: yellow;
+      }
+    </style>
+    <script>
+      function driveSSD (keyPressed) {
+        document.getElementById("input-verification").innerHTML=keyPressed
+
+        var bcd = dec2bcd (keyPressed)
+        var ssd = bcd2ssd (bcd[0], bcd[1], bcd[2], bcd[3])
+        illuminate (ssd[0], ssd[1],ssd[2], ssd[3], ssd[4], ssd[5], ssd[6])
+      }
+      function dec2bcd (x) {
+        alert ("dec2bcd() received " + x)
+        return ("0101")
+      }
+      function bcd2ssd (w,x,y,z) {
+        alert ("bcd2ssd() received " + w + x + y + z)
+        return ("1011011")
+      }
+      function illuminate (a,b,c,d,f,e,g) {
+        alert ("illuminate() received " + a + b + c + d + f + e + g)
+      }
+    </script>
+  </head>
+  <body>
+    <h3>More Realistic Output and Beginnings of an Actual Display (refinement 0.5)</h3>
+    <table class="standardTable">
+      <tr>
+       <td class="blackbox">
+         <button type="button" onclick="driveSSD(1)">1</button>
+         <button type="button" onclick="driveSSD(2)">2</button>
+         <button type="button" onclick="driveSSD(3)">3</button><br />
+         <button type="button" onclick="driveSSD(4)">4</button>
+         <button type="button" onclick="driveSSD(5)">5</button>
+         <button type="button" onclick="driveSSD(6)">6</button><br />
+         <button type="button" onclick="driveSSD(7)">7</button>
+         <button type="button" onclick="driveSSD(8)">8</button>
+         <button type="button" onclick="driveSSD(9)">9</button><br />
+         <button type="button" onclick="driveSSD(0)">0</button>
+         <p id="input-verification"></p>
+       </td>
+       <td class="blackbox">dec2BCD</td>
+       <td class="blackbox">BCD2SSD Signals</td>
+       <td class="blackbox">Illuminate Segments</td>
+      </tr>
+    </table>
+  </body>
 </html>
