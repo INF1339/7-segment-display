@@ -1,6 +1,60 @@
 <html>
   <head>
     <title>version 7</title>
+        <title>version 7</title>
+      <style>
+            .standardTable {
+              border: solid;
+              border-collapse: collapse;
+            }
+            .blackbox {
+              border: solid;
+              height: 150px;
+              width: 150px;
+              text-align: center;
+              background-color: black;
+              border-color: white;
+              color: yellow;
+            }
+            .segment {background-color: GhostWhite;}
+            .vertical {height: 50px; width: 10px;}
+
+            .horizontal {height: 10px; width: 50px;}
+
+            .segmentOn {background-color: red;}
+      </style>
+      <script>
+          function driveSSD (keyPressed) {
+              document.getElementById("input-verification").innerHTML=keyPressed
+
+              var bcd = dec2bcd (keyPressed)
+              var ssd = bcd2ssd (bcd[0], bcd[1], bcd[2], bcd[3])
+              illuminate (ssd[0], ssd[1],ssd[2], ssd[3], ssd[4], ssd[5], ssd[6])
+            }
+            function dec2bcd (keyPressed) {
+            // write input to user interface (UI)
+                document.getElementById("dec2bcd-input").innerHTML = keyPressed
+
+              // look up BCD equivalent of input
+                var bcd = ["0000","0001","0010", "0011", "0100", "0101","0110","0111","1000","1001"];
+                var output = bcd[keyPressed]
+            // write input to user interface (UI)
+             document.getElementById("dec2bcd-output").innerHTML = output
+              return output
+            }
+
+            function bcd2ssd (w,x,y,z) {
+                document.getElementById("bcd2ssd-input").innerHTML = w + x + y + z
+                // the next statement will be replaced with actual bcd2ssd algorithm; for now "1011011" is dummy data
+                  var output = "1011011"
+                  document.getElementById("bcd2ssd-output").innerHTML = output
+                return output
+            }
+            function illuminate (a,b,c,d,f,e,g) {
+              document.getElementById("illuminate-input").innerHTML = a + b + c + d + f + e + g
+            }
+      </script>
+
   </head>
   <body>
     <h3>Implement DEC2BCD (refinement 0.8)</h3>
