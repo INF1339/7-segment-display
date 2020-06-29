@@ -1,5 +1,63 @@
 <html>
-<body>
-NOTHING
-</body>
+  <head>
+    <title>version 7</title>
+  </head>
+  <body>
+    <h3>Implement DEC2BCD (refinement 0.8)</h3>
+    <table class="standardTable">
+      <tr>
+       <td class="blackbox">
+         <button type="button" onclick="driveSSD(1)">1</button>
+         <button type="button" onclick="driveSSD(2)">2</button>
+         <button type="button" onclick="driveSSD(3)">3</button><br />
+         <button type="button" onclick="driveSSD(4)">4</button>
+         <button type="button" onclick="driveSSD(5)">5</button>
+         <button type="button" onclick="driveSSD(6)">6</button><br />
+         <button type="button" onclick="driveSSD(7)">7</button>
+         <button type="button" onclick="driveSSD(8)">8</button>
+         <button type="button" onclick="driveSSD(9)">9</button><br />
+         <button type="button" onclick="driveSSD(0)">0</button>
+         <p id="input-verification"></p>
+       </td>
+       <td class="blackbox">
+         <p id="dec2bcd-input"></p>
+         <p>dec2bcd</p>
+         <p id="dec2bcd-output"></p>
+        </td>
+        <td class="blackbox">
+         <p id="bcd2ssd-input"></p>
+         <p>bcd2ssd</p>
+         <p id="bcd2ssd-output"></p>
+        </td>
+       <td class="blackbox">Illuminate Segments
+         <p id="illuminate-input"></p>
+        <table>
+          <tr>
+          <td></td><td class="segment horizontal">A</td><td></td>
+          </tr>
+          <tr>
+            <td class="segment vertical">F</td>
+            <td></td>
+            <td class="segment vertical">B</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="segment horizontal segmentOn">G</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="segment vertical">E</td>
+            <td></td>
+            <td class="segment vertical">C</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="segment horizontal">D</td>
+            <td></td>
+          </tr>
+          </table>
+          </td>
+      </tr>
+    </table>
+  </body>
 </html>
