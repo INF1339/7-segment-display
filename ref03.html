@@ -1,43 +1,42 @@
 <html>
 <head>
 <title>Seven Segment Display</title> 
-</head>
-<body>
-<h3>Seven Segment Display</h3>
+    <style>
+        .standardTable {border: solid;
+                        border-collapse: collapse;}
+        .blackbox {border: solid;
+                   height: 150px;
+                   width: 150px;
+                   text-align: center;
+                   background-color: black;
+                   border-color: white;
+                   color: yellow;}
+    </style>
     <script>
-      function turnSegmentOn() {
-         document.getElementById('S1').style.backgroundColor = 'red'
-      }
-    </script>
-<button type="button" onclick="turnSegmentOn()">
-  Turn on segment 1
-</button>
-<table>
-    <tr>
-        <td id="x1" class="blank"> </td>
-        <td id="S1" class="segment">S1</td>
-        <td id="x2" class="blank"> </td>
-    </tr>
-    <tr>
-        <td id="S6" class="segment">S6</td>
-        <td id="x3" class="blank"> </td>
-        <td id="S2" class="segment">S2</td>
-    </tr>
-    <tr>
-        <td id="x4" class="blank"> </td>
-        <td id="S7" class="segment">S7</td>
-        <td id="x5" class="blank"> </td>
-    </tr>
-    <tr>
-        <td id="S5" class="segment">S5</td>
-        <td id="x6" class="blank"> </td>
-        <td id="S3" class="segment">S3</td>
-    </tr>
-    <tr>
-        <td id="x7" class="blank"> </td>
-        <td id="S4" class="segment">S4</td>
-        <td id="x8" class="blank"> </td>
-    </tr>
-</table>    
-</body>
+        function driveSSD(keypressed) {
+            alert ("key press detected " + keypressed)
+        }
+</head>
+  <body>
+    <h3>Keypad + 3 Empty Black Boxes</h3>
+    <table class="standardTable">
+      <tr>
+       <td class="blackbox">
+         <button type="button" onclick="driveSSD(1)">1</button>
+         <button type="button" onclick="driveSSD(2)">2</button>
+         <button type="button" onclick="driveSSD(3)">3</button><br />
+         <button type="button" onclick="driveSSD(4)">4</button>
+         <button type="button" onclick="driveSSD(5)">5</button>
+         <button type="button" onclick="driveSSD(6)">6</button><br />
+         <button type="button" onclick="driveSSD(7)">7</button>
+         <button type="button" onclick="driveSSD(8)">8</button>
+         <button type="button" onclick="driveSSD(9)">9</button><br />
+         <button type="button" onclick="driveSSD(0)">0</button>
+       </td>
+       <td class="blackbox">dec2BCD</td>
+       <td class="blackbox">BCD2SSD Signals</td>
+       <td class="blackbox">Illuminate Segments</td>
+      </tr>
+    </table>
+  </body>
 </html>
