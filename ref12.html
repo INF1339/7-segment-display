@@ -1,0 +1,156 @@
+ <html>
+  <head>
+    <title>version 7</title>
+        <title>version 7</title>
+      <style>
+            .standardTable {
+              border: solid;
+              border-collapse: collapse;
+            }
+            .blackbox {
+              border: solid;
+              height: 150px;
+              width: 150px;
+              text-align: center;
+              background-color: black;
+              border-color: white;
+              color: yellow;
+            }
+            .segment {background-color: GhostWhite;}
+            .vertical {height: 50px; width: 10px;}
+
+            .horizontal {height: 10px; width: 50px;}
+
+            .segmentOn {background-color: red;}
+            .segmentOff {background-color: black;}
+      </style>
+      <script>
+            function driveSSD (keyPressed) {
+              //document.getElementById("input-verification").innerHTML=keyPressed
+
+              var bcd = dec2bcd (keyPressed)
+              var ssd = bcd2ssd (bcd[0], bcd[1], bcd[2], bcd[3])
+              illuminate (ssd[0], ssd[1],ssd[2], ssd[3], ssd[4], ssd[5], ssd[6])
+            }
+            function dec2bcd (keyPressed) {
+            // write input to user interface (UI)
+                //document.getElementById("dec2bcd-input").innerHTML = keyPressed
+
+              // look up BCD equivalent of input
+                var bcd = ["0000","0001","0010", "0011", "0100", "0101","0110","0111","1000","1001"];
+                var output = bcd[keyPressed]
+            // write input to user interface (UI)
+            //document.getElementById("dec2bcd-output").innerHTML = output
+              return output
+            }
+            function bcd2ssd (w,x,y,z) {
+                //document.getElementById("bcd2ssd-input").innerHTML = w + x + y + z
+                //convert inputs into logical variables
+                var W = w == "1"
+                var X = x == "1"
+                var Y = y == "1"
+                var Z = z == "1"
+                // the next statement will be replaced with actual bcd2ssd algorithm; for now "1011011" is dummy data
+                var a = "0"
+                var b = "0"
+                var c = "0"
+                var d = "0"
+                var e = "0"
+                var f = "0"
+                var g = "0"
+                // reset variables if bcd inputs require it
+                if ((!W && Y) || (!W && X && Z) || (W && !X && !Y) || (!X && !Y && !Z)) {a = "1"}
+                if (!W&!Y&!Z ||!W&!X&!Y ||!W&Y&Z ||!W&!X&Y || W&!X&!Y) {b = "1"} //expression for b
+                if (!W&!Y ||!W&X&Y || !W&Y&Z || W&!X&!Y) {c = "1"} //expression for c
+                if (!X&!Y&!Z ||!W&X&!Y&Z || !W&Y&!Z || !W&!X&Y || W&!X&!Y) {d = "1"} //expression for d
+                if (!X&!Y&!Z || !W&Y&!Z) {e = "1"} //expression for e
+                if (!W&!Y&!Z || !W&X&!Y || !W&X&!Z || W&!X&!Y) {f = "1"} //expression for f
+                if (!W&X&!Y || !W&Y&!Z || !W&!X&Y || W&!X&!Y) {g = "1"} //expression for g
+                var output = a + b + c + d + e + f + g
+                //document.getElementById("bcd2ssd-output").innerHTML = output
+                return output
+            }
+            function illuminate (a,b,c,d,e,f,g) {
+              //document.getElementById("illuminate-input").innerHTML = a + b + c + d + e + f + g
+              if (a == 1) {
+                  document.getElementById("segmenta").className = "segment horizontal segmentOn"}
+            else {
+                  document.getElementById("segmenta").className = "segment horizontal segmentOff"};
+              if (b == 1) {
+                  document.getElementById("segmentb").className = "segment vertical segmentOn"}
+            else {
+                  document.getElementById("segmentb").className = "segment vertical segmentOff"};
+              if (c == 1) {
+                  document.getElementById("segmentc").className = "segment vertical segmentOn"}
+            else {
+                  document.getElementById("segmentc").className = "segment vertical segmentOff"};
+              if (d == 1) {
+                  document.getElementById("segmentd").className = "segment horizontal segmentOn"}
+            else {
+                  document.getElementById("segmentd").className = "segment horizontal segmentOff"};
+              if (e == 1) {
+                  document.getElementById("segmente").className = "segment vertical segmentOn"}
+            else {
+                  document.getElementById("segmente").className = "segment vertical segmentOff"};
+              if (f == 1) {
+                  document.getElementById("segmentf").className = "segment vertical segmentOn"}
+            else {
+                  document.getElementById("segmentf").className = "segment vertical segmentOff"};
+              if (g == 1) {
+                  document.getElementById("segmentg").className = "segment horizontal segmentOn"}
+            else {
+                  document.getElementById("segmentg").className = "segment horizontal segmentOff"};
+            }      
+         </script>
+
+  </head>
+ <body>
+    <h3>Cleaning Up (refinement 0.12)</h3>
+    <table class="standardTable">
+      <tr>
+       <td class="blackbox">
+         <button type="button" onclick="driveSSD(1)">1</button>
+         <button type="button" onclick="driveSSD(2)">2</button>
+         <button type="button" onclick="driveSSD(3)">3</button><br />
+         <button type="button" onclick="driveSSD(4)">4</button>
+         <button type="button" onclick="driveSSD(5)">5</button>
+         <button type="button" onclick="driveSSD(6)">6</button><br />
+         <button type="button" onclick="driveSSD(7)">7</button>
+         <button type="button" onclick="driveSSD(8)">8</button>
+         <button type="button" onclick="driveSSD(9)">9</button><br />
+         <button type="button" onclick="driveSSD(0)">0</button>
+         <p id="input-verification"></p>
+       </td>
+
+       <td class="blackbox">
+         
+        <table style="margin: auto;">
+          <tr>
+          <td></td><td id="segmenta" class="segment horizontal"></td><td></td>
+          </tr>
+          <tr>
+            <td id="segmentf" class="segment vertical"></td>
+            <td></td>
+            <td id="segmentb" class="segment vertical"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td id="segmentg" class="segment horizontal"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td id="segmente" class="segment vertical"></td>
+            <td></td>
+            <td id="segmentc" class="segment vertical"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td id="segmentd" class="segment horizontal"></td>
+            <td></td>
+          </tr>
+          </table>
+          </td>
+      </tr>
+    </table>
+  </body>
+</html>
