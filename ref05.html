@@ -21,24 +21,33 @@
         document.getElementById("input-verification").innerHTML=keyPressed
 
         var bcd = dec2bcd (keyPressed)
-        var ssd = bcd2ssd (bcd[0], bcd[1], bcd[2], bcd[3])
-        illuminate (ssd[0], ssd[1],ssd[2], ssd[3], ssd[4], ssd[5], ssd[6])
+        var ssd = bcd2ssd (bcd)
+        illuminate (ssd)
       }
+
+
       function dec2bcd (x) {
-        alert ("dec2bcd() received " + x)
-        return ("0101")
+        // put the bcd versions of 0-9 into an array
+        var a = ['0000', '0001', '0010', '0011', '0010', '0100', '0101', '0110', 
+                 '0111', '1000', '1001']
+        // return the one that corresponds to the key pressed
+        return a[x]
       }
-      function bcd2ssd (w,x,y,z) {
-        alert ("bcd2ssd() received " + w + x + y + z)
-        return ("1011011")
+
+
+      function bcd2ssd (x) {
+        alert ("bcd2ssd() received " + x)
+        return ("bcd2ssdOUTPUT")
       }
-      function illuminate (a,b,c,d,f,e,g) {
-        alert ("illuminate() received " + a + b + c + d + f + e + g)
+
+
+      function illuminate (x) {
+        alert ("illuminate() received " + x)
       }
     </script>
   </head>
   <body>
-    <h3>More Realistic Output (refinement 0.5)</h3>
+    <h3>More Realistic Output and Beginnings of an Actual Display (refinement 0.5)</h3>
     <table class="standardTable">
       <tr>
        <td class="blackbox">
