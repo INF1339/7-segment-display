@@ -24,34 +24,41 @@
       </style>
       <script>
           function driveSSD (keyPressed) {
-              document.getElementById("input-verification").innerHTML=keyPressed
+            document.getElementById("input-verification").innerHTML=keyPressed
 
-              var bcd = dec2bcd (keyPressed)
-              var ssd = bcd2ssd (bcd[0], bcd[1], bcd[2], bcd[3])
-              illuminate (ssd[0], ssd[1],ssd[2], ssd[3], ssd[4], ssd[5], ssd[6])
-            }
-            function dec2bcd (x) {
-                document.getElementById("dec2bcd-input").innerHTML = x
-                // the next statement will be replaced with actual dec2bcd algorithm; for now "0101" is dummy data
-                  var output = "0101"
-                  document.getElementById("dec2bcd-output").innerHTML = output
-                  return output
-            }
+            var bcd = dec2bcd (keyPressed)
+            var ssd = bcd2ssd (bcd)
+            illuminate (ssd)
+          }
 
-            function bcd2ssd (w,x,y,z) {
-                document.getElementById("bcd2ssd-input").innerHTML = w + x + y + z
-                // the next statement will be replaced with actual bcd2ssd algorithm; for now "1011011" is dummy data
-                  var output = "1011011"
-                  document.getElementById("bcd2ssd-output").innerHTML = output
-                return output
-            }
-            function illuminate (a,b,c,d,f,e,g) {
-              document.getElementById("illuminate-input").innerHTML = a + b + c + d + f + e + g
-            }
-      </script>
+
+          function dec2bcd (x) {
+            //announce our input
+            document.getElementById("dec2bcd-input").innerHTML = x
+
+            // put the bcd versions of 0-9 into an array
+            var a = ['0000', '0001', '0010', '0011', '0010', '0100', '0101', '0110', 
+                     '0111', '1000', '1001']
+            // return the one that corresponds to the key pressed
+            return a[x]
+          }
+
+
+          function bcd2ssd (x) {
+            //announce our input
+            document.getElementById("bcd2ssd-input").innerHTML = x
+            return ("bcd2ssdOUTPUT")
+          }
+
+
+          function illuminate (x) {
+            //announce our input
+            document.getElementById("illuminate-input").innerHTML = x
+          }
+    </script>
   </head>
   <body>
-    <h3>Show all inputs and outputs (refinement 0.7)</h3>
+   <h3>Actual Display (refinement 0.7)</h3>
     <table class="standardTable">
       <tr>
        <td class="blackbox">
@@ -67,44 +74,45 @@
          <button type="button" onclick="driveSSD(0)">0</button>
          <p id="input-verification"></p>
        </td>
-       <td class="blackbox">
-         <p id="dec2bcd-input"></p>
-         <p>dec2bcd</p>
-         <p id="dec2bcd-output"></p>
-        </td>
         <td class="blackbox">
+          <p>dec2BCD</p>
+          <p id="dec2bcd-input"></p>  
+       </td>
+       <td class="blackbox">
+         <p>BCD2SSD Signals</p>
          <p id="bcd2ssd-input"></p>
-         <p>bcd2ssd</p>
-         <p id="bcd2ssd-output"></p>
-        </td>
-       <td class="blackbox">Illuminate Segments
+       </td>
+       <td class="blackbox">
+         <p>Illuminate Segments</p>
          <p id="illuminate-input"></p>
-        <table>
-          <tr>
-          <td></td><td class="segment horizontal">A</td><td></td>
+         <table>
+            <tr>
+              <td></td>
+              <td class="segment horizontal">A</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="segment vertical">F</td>
+              <td></td>
+              <td class="segment vertical">B</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="segment horizontal segmentOn">G</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="segment vertical">E</td>
+              <td></td>
+              <td class="segment vertical">C</td>
+           </tr>
+           <tr>
+             <td></td>
+             <td class="segment horizontal">D</td>
+             <td></td>
           </tr>
-          <tr>
-            <td class="segment vertical">F</td>
-            <td></td>
-            <td class="segment vertical">B</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="segment horizontal segmentOn">G</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="segment vertical">E</td>
-            <td></td>
-            <td class="segment vertical">C</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="segment horizontal">D</td>
-            <td></td>
-          </tr>
-          </table>
-          </td>
+        </table>      
+       </td>
       </tr>
     </table>
   </body>
